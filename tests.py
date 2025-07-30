@@ -1,25 +1,31 @@
-from functions.get_file_content import get_file_content
+from functions.run_python_file import run_python_file
 
 def run_tests():
-    print('get_file_content("calculator", "main.py"):')
+    print('run_python_file("calculator", "main.py"):')
     print("Result for main.py:")
-    print(get_file_content("calculator", "main.py"))
+    print(run_python_file("calculator", "main.py"))
     print()
 
-    print('get_file_content("calculator", "pkg/calculator.py"):')
-    print("Result for pkg/calculator.py:")
-    print(get_file_content("calculator", "pkg/calculator.py"))
+    print('run_python_file("calculator", "main.py", ["3 + 5"]):')
+    print("Result for [3 + 5]:")
+    print(run_python_file("calculator", "main.py", ["3 + 5"]))
     print()
 
-    print('get_file_content("calculator", "/bin/cat"):')
-    print('Result for \'/bin/cat\':')
-    print(get_file_content("calculator", "/bin/cat"))
+    print('run_python_file("calculator", "tests.py"):')
+    print("Result for tests.py:")
+    print(run_python_file("calculator", "tests.py"))
+    print()
+    
+    print('run_python_file("calculator", "../main.py"):')
+    print("Result for '../main.py':")
+    print(run_python_file("calculator", "../main.py"))
     print()
 
-    print('get_file_content("calculator", "pkg/does_not_exist.py"):')
-    print("Result for 'pkg/does_not_exist.py':")
-    print(get_file_content("calculator", "pkg/does_not_exist.py"))
+    print('run_python_file("calculator", "non_existent.py"):')
+    print("Result for 'nonexistent.py':")
+    print(run_python_file("calculator", "nonexistent.py"))
     print()
+
 
 if __name__ == "__main__":
     run_tests()
