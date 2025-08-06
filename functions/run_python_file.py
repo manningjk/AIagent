@@ -9,11 +9,12 @@ schema_run_python_file = types.FunctionDeclaration(
     parameters=types.Schema(
         type=types.Type.OBJECT,
         properties={
-            "directory": types.Schema(
+            "file_path": types.Schema(
                 type=types.Type.STRING,
                 description="The directory to run python files from, relative to the working directory. If not provided, reads files in the working directory itself.",
             ),
         },
+        required=["file_path"],
     ),
 )
 
@@ -45,10 +46,9 @@ def run_python_file(working_directory, file_path, args=[]):
             command = ['python', file_path] + args
 
             # Execute the command and capture output
-            results = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, timeout=30, cwd=working_directory)
+            results = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, timeout=30, cwd=working_directory)
 
             stdout_output = results.stdout.strip()
-            stderr_output = results.stderr.strip()
 
             if results.returncode != 0:
                 stderr_output += f"\nProcess exited with code {results.returncode}"
